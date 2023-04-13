@@ -20,6 +20,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -117,25 +118,34 @@ fun NewsList(newsResult: Result<List<Article>>) {
                             .fillMaxWidth(),
                         shape = RoundedCornerShape(8.dp),
                         elevation = 4.dp
-
-
                     ) {
                         Row(modifier = Modifier.fillMaxSize()) {
                             AsyncImage(
                                 model = article.urlToImage,
                                 contentDescription = article.title,
-                                placeholder = painterResource(id = R.drawable.image1)
+                                placeholder = painterResource(id = R.drawable.image1),
+                                modifier = Modifier
+                                    .width(120.dp)
+                                    .fillMaxHeight()
+                                    .padding(end = 16.dp),
+                                contentScale = ContentScale.Crop
                             )
                             Column(modifier = Modifier.fillMaxSize()) {
-                                //                        Text(
-//                            text = article.title,
-//                            style = MaterialTheme.typography.h6
-//                        )
                                 Text(
-                                    text = article.description,
-                                    style = MaterialTheme.typography.body2,
-                                    modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
+                                    text = article.source.name,
+                                    style = MaterialTheme.typography.caption,
                                 )
+                                Text(
+                                    text = article.title,
+                                    style = MaterialTheme.typography.body1,
+                                    modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+                                )
+                                article.author?.let {
+                                    Text(
+                                        text = it,
+                                        style = MaterialTheme.typography.caption,
+                                    )
+                                }
                             }
 
                         }
