@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.homework4.data.RetrofitHelper
 import com.example.homework4.entity.Article
 import com.example.homework4.repository.NewsRepo
-import com.example.homework4.entity.NewsResponse
 import com.example.homework4.service.NewsApiService
 import kotlinx.coroutines.launch
 
