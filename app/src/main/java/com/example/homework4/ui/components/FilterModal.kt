@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.example.homework4.entity.Category
 import kotlinx.coroutines.launch
@@ -24,12 +26,13 @@ fun FilterModal(
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-            LazyColumn {
+            LazyColumn(modifier = Modifier.semantics { contentDescription = "FilterModalSheet" }) {
                 items(items = Category.values().toList()) {
                     ListItem(
                         text = { Text(it.toString()) },
                         modifier = Modifier
                             .fillMaxSize()
+                            .semantics { contentDescription = "categoryItem" }
                             .clickable {
                                 run { onFilter(it.categoryName) }
                                 scope.launch { state.hide() }
